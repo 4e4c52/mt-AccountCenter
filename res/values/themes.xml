@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="Theme.mtaccountcenter" parent="@style/Theme.GreenDroid.NoTitleBar">
+	
+		<item name="gdActionBarTitleColor">@android:color/white</item>
+		<item name="gdActionBarBackground">@drawable/action_bar_background</item>
+		<item name="gdActionBarDividerDrawable">@drawable/action_bar_divider</item>
+		<item name="gdActionBarDividerWidth">2px</item>
+		<item name="gdActionBarApplicationDrawable">@drawable/application_logo</item>
+	
+	</style>
+    
+</resources>

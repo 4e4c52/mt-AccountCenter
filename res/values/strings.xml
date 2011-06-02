@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Application -->
+	<string name="app_name">(mt) Account Center</string>
+	<string name="app_url">http://www.mediatemple.net</string>
+	<string name="project_url">http://android.syrinxoon.net/p/mt-account-center.html</string>
+	
+	<!-- Accounts activity -->
+    <string name="no_accounts">There is no accounts registered yet</string>
+    <string name="menu_add_account">Add account</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
+    <string name="account_added">Account added!</string>
+    <string name="account_not_added">Account could not be added.\nHave you (dv) 4.0 or a (ve) server?</string>
+    <string name="rename_account_title">Rename an account</string>
+    <string name="account_name_hint">Account name</string>
+    <string name="account_renamed">Account renamed successfully!</string>
+    <string name="removing_account">Removing account...</string>
+    <string name="account_removed">Account removed successfully!</string>
+    
+    <!-- Add account activity -->
+    <string name="add_account_label">Add an account</string>
+    <string name="add_account_title">To add an account, you must provide its name (whatever you want) to recognize it among the other accounts and its API key to contact the (mt) servers.</string>
+    <string name="add_account_button">Add account</string>
+    <string name="account_name_hint">Account name</string>
+    <string name="account_api_key_hint">API key (65 characters)</string>
+    <string name="account_name_error">Your account name must be at least 3 characters long.</string>
+    <string name="account_api_key_error">Your API key must be exactly 65 characters long.</string>
+    <string name="account_error_button">Update</string>
+    <string name="account_credentials_error">The API key seems to be wrong.\nPlease update it.</string>
+    <string name="verifying_api_key">Verifying API key...</string>
+    <string name="registering_account">Registering account...</string>
+    <string name="registering_services">Registering services...</string>
+    <string name="unexpected_error">An unexpected error occurred, please try again.</string>
+    
+    <!-- Services Activity -->
+    <string name="services_label">Services of </string>
+    <string name="no_services">This account has no services</string>
+    <string name="rename_service_title">Rename a service</string>
+    <string name="service_name_hint">Service name</string>
+    <string name="service_renamed">Service renamed successfully!</string>
+    
+    <!-- Actions Activity -->
+    <string name="actions_label">Actions for </string>
+    <string name="actions_description">Only the compatible actions with your services are shown.</string>
+    <string name="separator_utilities">Utilities</string>
+    <string name="separator_stats">Statistics</string>
+    <string name="separator_passwords">Passwords</string>
+    <string name="action_reboot">Reboot</string>
+    <string name="action_hd_space">Add temporary disk space</string>
+    <string name="action_flush">Flush firewall rules</string>
+    <string name="action_stats_15">15 last minutes</string>
+    <string name="action_stats_60">60 last minutes</string>
+    <string name="retrieving_stats">Retrieving statistics...</string>
+    <string name="action_plesk_password">Change Plesk password</string>
+    <string name="action_root_password">Change root password</string>
+    <string name="request_error">An error occurred while performing the request.</string>
+    <string name="rebooting_server">Rebooting server...</string>
+    <string name="server_rebooted">Your server will reboot within 5 minutes.</string>
+    <string name="adding_hd_space">Adding HDD space...</string>
+    <string name="hd_space_added">1GB has been added for the next 6 hours</string>
+    <string name="flushing_firewall">Flushing firewall rules...</string>
+    <string name="firewall_flushed">Your firewall rules have been flushed</string>
+    <string name="set_root_password_title">Change root password</string>
+    <string name="root_password_hint">Root password</string>
+    <string name="saving_root_password">Saving new root password...</string>
+    <string name="root_password_saved">The new root password has been saved</string>
+    <string name="set_plesk_password_title">Change Plesk password</string>
+    <string name="plesk_password_hint">Plesk password</string>
+    <string name="saving_plesk_password">Saving new Plesk password...</string>
+    <string name="plesk_password_saved">The new Plesk password has been saved. This change can take up to 15 minutes to take effect.</string>
+    
+    <!-- Stats Activity -->
+    <string name="stats_label">Statistics</string>
+    <string name="stats_label_1">Stats for </string>
+    <string name="stats_label_2"> for the last </string>
+    
+    <!-- Chart -->
+    <string name="cpu">CPU</string>
+    <string name="processes">Processes</string>
+    <string name="memory">Memory</string>
+    <string name="diskSpace">Disk space</string>
+    <string name="load1Min">Load 1 Min</string>
+    <string name="load5Min">Load 5 Min</string>
+    <string name="load15Min">Load 15 Min</string>
+    <string name="state">State</string>
+    
+    <!-- Preferences -->
+    <string name="preferences_label">Preferences</string>
+    <string name="servers_status_preferences">Background notifications</string>
+    <string name="servers_status_notifications">Servers status</string>
+    <string name="servers_status_notifications_summary">Notify when a server needs your attention</string>
+    <string name="servers_status_notifications_start">Start on boot</string>
+    <string name="servers_status_notifications_start_summary">Start notification service on phone boot</string>
+    <string name="servers_notifications_interval">Check frequency</string>
+    <string name="servers_notifications_interval_summary">Time between two checks</string>
+    <string name="servers_notifications_level">Notifications level</string>
+    <string name="servers_notifications_level_summary">Minimum server status to trigger a notification</string>
+    
+    <!-- Informations -->
+    <string name="informations_label">General informations</string>
+    <string name="about">About</string>
+    <string name="license">Copyright</string>
+    <string name="more_info_on_application">For more information on the (mt) Account Center and how to use it, go to the application official page:</string>
+    <string name="about_content">The (mt) Account Center is intended to monitor your (mt) servers. With this app, you can do (almost) everything the API offers.</string>
+    <string name="disclaimer">\nPlease read the following disclaimer freely inspired by the one used by CyanogenMod.\n\nI\'m not responsible of any damages or problems this app can causes to your servers. YOU are choosing to use this app, and if you point the finger at me for messing up your server, I will laugh at you.</string>
+    
+    <!-- Misc -->
+    <string name="rename_quickaction">Rename</string>
+    <string name="remove_quickaction">Remove</string>
+    <string name="rename_button">Rename</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="close_button">Close</string>
+    <string name="set_password_button">Set password</string>
+    
+    <!-- Notifications -->
+    <string name="ticker">A service require your attention</string>
+    <string name="not_part_1">The</string>
+    <string name="not_part_2">of</string>
+    <string name="not_part_3">is in a</string>
+    <string name="not_part_4">state</string>
+    <string name="Warning">warning</string>
+    <string name="Critical">critical</string>
+    
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.syrinxoon.mtaccountcenter"
+	android:versionCode="1"
+	android:versionName="1.0.0 Beta">
+      
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="10" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application 
+    	android:icon="@drawable/icon" 
+    	android:label="@string/app_name"
+    	android:theme="@style/Theme.mtaccountcenter" 
+    	android:name=".MtApplication">
+          
+        <activity android:name=".AccountsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+        	android:name=".AddAccountActivity"
+         	android:label="@string/add_account_label">
+         </activity>
+         
+         <activity
+         	android:name=".ServicesActivity"
+         	android:label="@string/services_label">
+         </activity>
+         
+         <activity
+         	android:name=".ActionsActivity"
+         	android:label="@string/actions_label">
+         </activity>
+         
+         <activity
+         	android:name=".StatsActivity"
+         	android:label="@string/stats_label">
+         </activity>
+         
+         <activity
+         	android:name=".PreferencesActivity"
+         	android:label="@string/preferences_label">
+         </activity>
+         
+         <activity
+         	android:name=".InformationsActivity"
+         	android:label="@string/informations_label">
+         </activity>
+         
+         <activity 
+         	android:name=".WebContentActivity">
+         </activity>
+         
+         <activity 
+         	android:name=".AboutActivity">
+         </activity>  
+         
+         <activity 
+         	android:name="org.achartengine.GraphicalActivity">
+         </activity>
+         
+         <service 
+         	android:name=".ServersStatusService">
+         </service>
+
+    </application>
+</manifest>

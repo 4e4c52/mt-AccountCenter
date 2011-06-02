@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+   xmlns:android="http://schemas.android.com/apk/res/android">
+   
+	<PreferenceCategory
+   		android:title="@string/servers_status_preferences">
+   
+   		<CheckBoxPreference
+      		android:key="server_status_notifications"
+      		android:title="@string/servers_status_notifications"
+      		android:summary="@string/servers_status_notifications_summary"
+      		android:defaultValue="false" />
+      		
+      	<ListPreference
+      		android:key="servers_notifications_interval"
+      		android:title="@string/servers_notifications_interval"
+      		android:summary="@string/servers_notifications_interval_summary"
+      		android:entries="@array/notifications_interval_human"
+      		android:entryValues="@array/notifications_interval_values"
+      		android:defaultValue="15" />
+      		
+      	<ListPreference
+      		android:key="servers_notifications_level"
+      		android:title="@string/servers_notifications_level"
+      		android:summary="@string/servers_notifications_level_summary"
+      		android:entries="@array/notifications_level_human"
+      		android:entryValues="@array/notifications_level_values"
+      		android:defaultValue="1" />
+      
+    </PreferenceCategory>
+
+</PreferenceScreen>
