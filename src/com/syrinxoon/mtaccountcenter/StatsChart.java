@@ -96,6 +96,7 @@ public class StatsChart extends AbstractChart {
 		renderer.setShowGrid(true);
 		renderer.setXLabelsAlign(Align.RIGHT);
 		renderer.setYLabelsAlign(Align.RIGHT);
+		renderer.setZoomEnabled(true, true);		
 		
 		GraphicalView view = ChartFactory.getTimeChartView(context, buildDateDataset(titles, x, values),  renderer, "HH:mm");
 		
