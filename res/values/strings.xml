@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- Application -->
-	<string name="app_name">(mt) Account Center</string>
+	<string name="app_name">(mt) AccountCenter</string>
 	<string name="app_url">http://www.mediatemple.net</string>
 	<string name="project_url">http://android.syrinxoon.net/p/mt-account-center.html</string>
 	
@@ -69,6 +69,7 @@
     <string name="plesk_password_hint">Plesk password</string>
     <string name="saving_plesk_password">Saving new Plesk password...</string>
     <string name="plesk_password_saved">The new Plesk password has been saved. This change can take up to 15 minutes to take effect.</string>
+    <string name="no_stats">Could not retrieve any statistics for this server.</string>
     
     <!-- Stats Activity -->
     <string name="stats_label">Statistics</string>

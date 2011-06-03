@@ -37,7 +37,7 @@ public class ActionsActivity extends GDListActivity {
 	
 	private String serviceName;
 	private String data;
-	@SuppressWarnings("unused")
+	private int accountId;
 	private int serviceType;
 	private int serviceId;
 	private String apiKey;
@@ -77,6 +77,7 @@ public class ActionsActivity extends GDListActivity {
         
     	super.onCreate(savedInstanceState);
     	
+    	this.accountId = getIntent().getIntExtra("accountId", 0);
     	this.serviceName = getIntent().getStringExtra("serviceName");
     	this.serviceType = getIntent().getIntExtra("serviceType", 0);
     	this.serviceId = getIntent().getIntExtra("serviceId", 0);
@@ -87,20 +88,37 @@ public class ActionsActivity extends GDListActivity {
     	
     	List<Item> list = new ArrayList<Item>();
     	
-    	list.add(new DescriptionItem(getResources().getText(R.string.actions_description).toString()));    
+    	list.add(new DescriptionItem(getResources().getText(R.string.actions_description).toString())); 
+    	
     	list.add(new SeparatorItem(getResources().getText(R.string.separator_utilities).toString()));
+    	
     	list.add(createTextItem(R.string.action_reboot, ACTION_REBOOT));
-    	list.add(createTextItem(R.string.action_hd_space, ACTION_HD_SPACE));
-    	list.add(createTextItem(R.string.action_flush, ACTION_FLUSH));
-    	list.add(new SeparatorItem(getResources().getText(R.string.separator_stats).toString()));
-    	list.add(createTextItem(R.string.action_stats_15, ACTION_STATS_15));
-    	list.add(createTextItem(R.string.action_stats_60, ACTION_STATS_60));
+    	
+    	if ( ! is_dv_20_server(this.serviceType)) {
+    		// Actions not available for (dv) 2.0 servers
+    		list.add(createTextItem(R.string.action_hd_space, ACTION_HD_SPACE));
+    		list.add(createTextItem(R.string.action_flush, ACTION_FLUSH));
+    	}
+    	
+    	if (is_ve_server(this.serviceType) || is_dv_40_server(this.serviceType)) {
+    		// Actions available only for (ve) and (dv) 4.0 servers
+    		list.add(new SeparatorItem(getResources().getText(R.string.separator_stats).toString()));
+    		
+    		list.add(createTextItem(R.string.action_stats_15, ACTION_STATS_15));
+        	list.add(createTextItem(R.string.action_stats_60, ACTION_STATS_60));
+    	}
+    	
     	list.add(new SeparatorItem(getResources().getText(R.string.separator_passwords).toString()));
+    	
     	list.add(createTextItem(R.string.action_root_password, ACTION_ROOT_PASSWORD));
     	list.add(createTextItem(R.string.action_plesk_password, ACTION_PLESK_PASSWORD));
     	
     	final ItemAdapter adapter = new ItemAdapter(this, list);
         setListAdapter(adapter);
+        
+        // Any error message?
+        String errorMessage = getIntent().getStringExtra("errorMessage");
+    	if (errorMessage != null) Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
         
         initThreading();
     	
@@ -152,14 +170,22 @@ public class ActionsActivity extends GDListActivity {
     		case ACTION_STATS_15:
     			dismissDialog(STATS_15_DIALOG);
     			intent = new Intent(ActionsActivity.this, StatsActivity.class);
+    			intent.putExtra("accountId", this.accountId);
     			intent.putExtra("serviceName", this.serviceName);
+    			intent.putExtra("apiKey", this.apiKey);
+    			intent.putExtra("serviceType", this.serviceType);
+    			intent.putExtra("serviceId", this.serviceId);
     			intent.putExtra("stats", stats.toString());
     			startActivity(intent);
     			break;
     		case ACTION_STATS_60:
     			dismissDialog(STATS_60_DIALOG);
     			intent = new Intent(ActionsActivity.this, StatsActivity.class);
+    			intent.putExtra("accountId", this.accountId);
     			intent.putExtra("serviceName", this.serviceName);
+    			intent.putExtra("apiKey", this.apiKey);
+    			intent.putExtra("serviceType", this.serviceType);
+    			intent.putExtra("serviceId", this.serviceId);
     			intent.putExtra("stats", stats.toString());
     			startActivity(intent);
     			break;
@@ -439,6 +465,56 @@ public class ActionsActivity extends GDListActivity {
 	    return dialog;
 	}
 	
+	/*
+	 * Check if the serviceType matches a (ve) server
+	 */
+	private Boolean is_ve_server(int serviceType) {
+		
+		if (serviceType >= 668 && serviceType <= 723) return true;
+		else return false;
+		
+	}
 	
+	/*
+	 * Check if the serviceType matches a (dv) 4.0 server
+	 */
+	private Boolean is_dv_40_server(int serviceType) {
+	
+		if (serviceType >= 725 && serviceType <= 737) return true;
+		else return false;
+		
+	}
+	
+	/*
+	 * Check if the serviceType matches a (dv) 3.5 server
+	 */
+	@SuppressWarnings("unused")
+	private Boolean is_dv_35_server(int serviceType) {
+		
+		if (serviceType >= 605 && serviceType <= 610) return true;
+		else return false;
+		
+	}
+	
+	/*
+	 * Check if the serviceType matches a (dv) 3.0 server
+	 */
+	@SuppressWarnings("unused")
+	private Boolean is_dv_30_server(int serviceType) {
+		
+		if (serviceType >= 525 && serviceType <= 535) return true;
+		else return false;
+		
+	}
+	
+	/*
+	 * Check if the serviceType matches a (dv) 2.0 server
+	 */
+	private Boolean is_dv_20_server(int serviceType) {
+		
+		if (serviceType >= 208 && serviceType <= 263) return true;
+		else return false;
+		
+	}
 	
 }

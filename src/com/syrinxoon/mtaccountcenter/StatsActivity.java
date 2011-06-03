@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import greendroid.app.GDActivity;
@@ -17,6 +18,10 @@ public class StatsActivity extends GDActivity {
         super.onCreate(savedInstanceState);
         
         String serviceName = getIntent().getStringExtra("serviceName");
+        String apiKey = getIntent().getStringExtra("apiKey");
+        int accountId = getIntent().getIntExtra("accountId", 0);
+        int serviceType = getIntent().getIntExtra("serviceType", 0);
+        int serviceId = getIntent().getIntExtra("serviceId", 0);
         String label = (String) getResources().getText(R.string.stats_label_1);
     	getActionBar().setTitle(label + " " + serviceName);
         
@@ -32,7 +37,21 @@ public class StatsActivity extends GDActivity {
 		
 		JSONArray items = stats.optJSONArray("stats");
 		
-		int length = items.length();
+		int length = 0;
+		
+		// If we can't retrieve any statistics, let's go back
+		try {
+			length = items.length();
+		} catch (NullPointerException e) {
+			Intent intent = new Intent(StatsActivity.this, (Class<?>) ServicesActivity.class);
+			intent.putExtra("accountId", accountId);
+			intent.putExtra("serviceName", serviceName);
+	    	intent.putExtra("serviceType", serviceType);
+	    	intent.putExtra("serviceId", serviceId);
+	    	intent.putExtra("apiKey", apiKey);
+	    	intent.putExtra("errorMessage", getResources().getText(R.string.no_stats).toString());
+	    	startActivity(intent);		
+		}
 		
 		long [] dates = new long[length];
 		double cpu[] = new double[length];
@@ -46,11 +65,7 @@ public class StatsActivity extends GDActivity {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			/*
-			calendar.setTimeInMillis((item.optLong("timeStamp") * 1000));
-			hour = calendar.get(Calendar.HOUR_OF_DAY);
-			minute = calendar.get(Calendar.MINUTE);
-			*/
+
 			double itemCPU = item.optDouble("cpu");
 			double itemMemory = item.optDouble("memory");
 			

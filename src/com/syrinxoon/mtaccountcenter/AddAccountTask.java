@@ -84,7 +84,6 @@ public class AddAccountTask implements Runnable {
 	    	   json = new JSONArray(payload);	
 	    	   return json;
 	       } catch(JSONException e) {
-	    	   Log.d(DEBUG_TAG, ">>> Error, we create the error JSONArray");
 	    	   json = new JSONArray();
 	    	   json.put(1, true);
 	    	   return json;

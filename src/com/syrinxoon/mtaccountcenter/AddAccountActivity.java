@@ -99,6 +99,7 @@ public class AddAccountActivity extends GDActivity {
                 	if (addAccountPending != null) addAccountPending.cancel(true); 
                 }
             });
+	    	AddAccountActivity.this.dialog = dialog;
 	        break;
 	    case ERROR_NAME_DIALOG:
 	    	builder = new AlertDialog.Builder(AddAccountActivity.this);
@@ -111,6 +112,7 @@ public class AddAccountActivity extends GDActivity {
 			           }
 			       });
 			dialog = builder.create();
+			AddAccountActivity.this.dialog = dialog;
 	        break;
 	    case ERROR_API_KEY_DIALOG:
 	    	builder = new AlertDialog.Builder(AddAccountActivity.this);
@@ -123,6 +125,7 @@ public class AddAccountActivity extends GDActivity {
 			           }
 			       });
 			dialog = builder.create();
+			AddAccountActivity.this.dialog = dialog;
 	    	break;
 	    case ERROR_CREDENTIALS_DIALOG:
 	    	builder = new AlertDialog.Builder(AddAccountActivity.this);
@@ -135,9 +138,11 @@ public class AddAccountActivity extends GDActivity {
 			           }
 			       });
 			dialog = builder.create();
+			AddAccountActivity.this.dialog = dialog;
 	        break;
 	    default:
 	        dialog = null;
+	        AddAccountActivity.this.dialog = dialog;
 	    }
 	    return dialog;
 	}

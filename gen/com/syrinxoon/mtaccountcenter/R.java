@@ -661,10 +661,10 @@ containing a value of this type.
         public static final int accounts_menu=0x7f0c0000;
     }
     public static final class string {
-        public static final int Critical=0x7f090071;
-        public static final int Warning=0x7f090070;
-        public static final int about=0x7f090060;
-        public static final int about_content=0x7f090063;
+        public static final int Critical=0x7f090072;
+        public static final int Warning=0x7f090071;
+        public static final int about=0x7f090061;
+        public static final int about_content=0x7f090064;
         public static final int account_added=0x7f090016;
         public static final int account_api_key_error=0x7f090022;
         public static final int account_api_key_hint=0x7f090020;
@@ -696,13 +696,13 @@ containing a value of this type.
          */
         public static final int app_name=0x7f09000f;
         public static final int app_url=0x7f090010;
-        public static final int cancel_button=0x7f090068;
-        public static final int close_button=0x7f090069;
+        public static final int cancel_button=0x7f090069;
+        public static final int close_button=0x7f09006a;
         /**  Chart 
          */
-        public static final int cpu=0x7f09004d;
-        public static final int disclaimer=0x7f090064;
-        public static final int diskSpace=0x7f090050;
+        public static final int cpu=0x7f09004e;
+        public static final int disclaimer=0x7f090065;
+        public static final int diskSpace=0x7f090051;
         public static final int firewall_flushed=0x7f090041;
         public static final int flushing_firewall=0x7f090040;
         public static final int gd_add=0x7f09000b;
@@ -723,41 +723,42 @@ containing a value of this type.
         public static final int hd_space_added=0x7f09003f;
         /**  Informations 
          */
-        public static final int informations_label=0x7f09005f;
-        public static final int license=0x7f090061;
-        public static final int load15Min=0x7f090053;
-        public static final int load1Min=0x7f090051;
-        public static final int load5Min=0x7f090052;
-        public static final int memory=0x7f09004f;
+        public static final int informations_label=0x7f090060;
+        public static final int license=0x7f090062;
+        public static final int load15Min=0x7f090054;
+        public static final int load1Min=0x7f090052;
+        public static final int load5Min=0x7f090053;
+        public static final int memory=0x7f090050;
         public static final int menu_about=0x7f090015;
         public static final int menu_add_account=0x7f090013;
         public static final int menu_settings=0x7f090014;
-        public static final int more_info_on_application=0x7f090062;
+        public static final int more_info_on_application=0x7f090063;
         /**  Accounts activity 
          */
         public static final int no_accounts=0x7f090012;
         public static final int no_services=0x7f09002a;
-        public static final int not_part_1=0x7f09006c;
-        public static final int not_part_2=0x7f09006d;
-        public static final int not_part_3=0x7f09006e;
-        public static final int not_part_4=0x7f09006f;
+        public static final int no_stats=0x7f09004a;
+        public static final int not_part_1=0x7f09006d;
+        public static final int not_part_2=0x7f09006e;
+        public static final int not_part_3=0x7f09006f;
+        public static final int not_part_4=0x7f090070;
         public static final int plesk_password_hint=0x7f090047;
         public static final int plesk_password_saved=0x7f090049;
         /**  Preferences 
          */
-        public static final int preferences_label=0x7f090055;
-        public static final int processes=0x7f09004e;
+        public static final int preferences_label=0x7f090056;
+        public static final int processes=0x7f09004f;
         public static final int project_url=0x7f090011;
         public static final int rebooting_server=0x7f09003c;
         public static final int registering_account=0x7f090026;
         public static final int registering_services=0x7f090027;
-        public static final int remove_quickaction=0x7f090066;
+        public static final int remove_quickaction=0x7f090067;
         public static final int removing_account=0x7f09001b;
         public static final int rename_account_title=0x7f090018;
-        public static final int rename_button=0x7f090067;
+        public static final int rename_button=0x7f090068;
         /**  Misc 
          */
-        public static final int rename_quickaction=0x7f090065;
+        public static final int rename_quickaction=0x7f090066;
         public static final int rename_service_title=0x7f09002b;
         public static final int request_error=0x7f09003b;
         public static final int retrieving_stats=0x7f090038;
@@ -769,32 +770,32 @@ containing a value of this type.
         public static final int separator_stats=0x7f090031;
         public static final int separator_utilities=0x7f090030;
         public static final int server_rebooted=0x7f09003d;
-        public static final int servers_notifications_interval=0x7f09005b;
-        public static final int servers_notifications_interval_summary=0x7f09005c;
-        public static final int servers_notifications_level=0x7f09005d;
-        public static final int servers_notifications_level_summary=0x7f09005e;
-        public static final int servers_status_notifications=0x7f090057;
-        public static final int servers_status_notifications_start=0x7f090059;
-        public static final int servers_status_notifications_start_summary=0x7f09005a;
-        public static final int servers_status_notifications_summary=0x7f090058;
-        public static final int servers_status_preferences=0x7f090056;
+        public static final int servers_notifications_interval=0x7f09005c;
+        public static final int servers_notifications_interval_summary=0x7f09005d;
+        public static final int servers_notifications_level=0x7f09005e;
+        public static final int servers_notifications_level_summary=0x7f09005f;
+        public static final int servers_status_notifications=0x7f090058;
+        public static final int servers_status_notifications_start=0x7f09005a;
+        public static final int servers_status_notifications_start_summary=0x7f09005b;
+        public static final int servers_status_notifications_summary=0x7f090059;
+        public static final int servers_status_preferences=0x7f090057;
         public static final int service_name_hint=0x7f09002c;
         public static final int service_renamed=0x7f09002d;
         /**  Services Activity 
          */
         public static final int services_label=0x7f090029;
-        public static final int set_password_button=0x7f09006a;
+        public static final int set_password_button=0x7f09006b;
         public static final int set_plesk_password_title=0x7f090046;
         public static final int set_root_password_title=0x7f090042;
-        public static final int state=0x7f090054;
+        public static final int state=0x7f090055;
         /**  Stats Activity 
          */
-        public static final int stats_label=0x7f09004a;
-        public static final int stats_label_1=0x7f09004b;
-        public static final int stats_label_2=0x7f09004c;
+        public static final int stats_label=0x7f09004b;
+        public static final int stats_label_1=0x7f09004c;
+        public static final int stats_label_2=0x7f09004d;
         /**  Notifications 
          */
-        public static final int ticker=0x7f09006b;
+        public static final int ticker=0x7f09006c;
         public static final int unexpected_error=0x7f090028;
         public static final int verifying_api_key=0x7f090025;
     }

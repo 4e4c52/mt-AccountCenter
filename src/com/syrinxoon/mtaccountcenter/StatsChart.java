@@ -60,13 +60,6 @@ public class StatsChart extends AbstractChart {
 	public GraphicalView execute(Context context) {
 	  
 		String[] titles = this.infos;
-    
-		/*
-		List<double[]> xAxis = new ArrayList<double[]>();
-		for (int i = 0; i < titles.length; i++) {
-			xAxis.add(this.dates);
-		}
-		*/
 		
 		List<Date[]> x = new ArrayList<Date[]>();
 	    for (int i = 0; i < titles.length; i++) {
@@ -103,7 +96,7 @@ public class StatsChart extends AbstractChart {
 		renderer.setShowGrid(true);
 		renderer.setXLabelsAlign(Align.RIGHT);
 		renderer.setYLabelsAlign(Align.RIGHT);
-		renderer.setZoomEnabled(false, false);		
+		renderer.setZoomEnabled(true, true);		
 		
 		GraphicalView view = ChartFactory.getTimeChartView(context, buildDateDataset(titles, x, values),  renderer, "HH:mm");
 		

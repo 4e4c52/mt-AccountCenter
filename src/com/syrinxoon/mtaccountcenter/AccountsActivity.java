@@ -27,7 +27,6 @@ import android.graphics.drawable.Drawable;
 import static android.provider.BaseColumns._ID;
 import static com.syrinxoon.mtaccountcenter.Constants.ACCOUNTS_TABLE;
 import static com.syrinxoon.mtaccountcenter.Constants.ACCOUNT_NAME;
-import static com.syrinxoon.mtaccountcenter.Constants.ACCOUNT_API_KEY;
 
 import greendroid.app.GDListActivity;
 import greendroid.graphics.drawable.ActionBarDrawable;
@@ -45,8 +44,7 @@ public class AccountsActivity extends GDListActivity {
 	//private static final String DEBUG_TAG = "AccountsActivity";
 	
 	private AppData database;	
-	
-	private static String[] FROM = { _ID, ACCOUNT_NAME, ACCOUNT_API_KEY, };
+
 	private static String ORDER_BY = _ID + " ASC";
 	private static final int RENAME_DIALOG = 0;
 	private QuickActionWidget mBar;
@@ -68,11 +66,13 @@ public class AccountsActivity extends GDListActivity {
        
     	database = new AppData(this);
     	
+    	/* DISABLED because useless with the current API
     	Boolean notifications = PreferencesActivity.getNotifications(this);
     	
     	if (notifications) {
     		startService(new Intent(this, ServersStatusService.class));
     	}
+    	*/
     	
     	try {
     		Cursor cursor = getAccounts();
@@ -96,11 +96,13 @@ public class AccountsActivity extends GDListActivity {
     @Override
     protected void onResume() {
     	super.onResume();
+    	/* DISABLED because useless with the current API
     	Boolean notifications = PreferencesActivity.getNotifications(this);
     	
     	if (notifications) {
     		startService(new Intent(this, ServersStatusService.class));
     	}
+    	*/
     }
     
     @Override
@@ -192,7 +194,7 @@ public class AccountsActivity extends GDListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         final TextItem textItem = (TextItem) l.getAdapter().getItem(position);
-        String accountId = textItem.getTag(2).toString();
+        int accountId = (Integer) textItem.getTag(2);
         String apiKey = textItem.getTag(3).toString();
         String accountName = textItem.getTag(4).toString();
         

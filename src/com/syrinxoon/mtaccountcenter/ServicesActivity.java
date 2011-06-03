@@ -66,7 +66,7 @@ public class ServicesActivity extends GDListActivity {
         
     	super.onCreate(savedInstanceState);
     	
-    	this.accountId = new Integer(getIntent().getStringExtra("accountId"));
+    	this.accountId = getIntent().getIntExtra("accountId", 0);
     	this.apiKey = getIntent().getStringExtra("apiKey");
     	this.accountName = getIntent().getStringExtra("accountName");
     	services = new AppData(this);
@@ -209,7 +209,7 @@ public class ServicesActivity extends GDListActivity {
     	        
     	        ThumbnailItem item;
     	        
-    	        if (serviceType >= 668 && serviceType <= 723) {
+    	        if (is_ve_server(serviceType)) {
     	        	item = new ThumbnailItem(serviceName, servicePrimaryDomain, R.drawable.ve_server);
     	        	item.setTag(1, ActionsActivity.class);
     	        	item.setTag(2, serviceName);
@@ -218,7 +218,7 @@ public class ServicesActivity extends GDListActivity {
     	        	item.setTag(5, serviceIdentifier);
         	        items.add(item);
     	        }
-    	        else if (serviceType >= 725 && serviceType <= 738) {
+    	        else if (is_dv_server(serviceType)) {
     	        	item = new ThumbnailItem(serviceName, servicePrimaryDomain, R.drawable.dv_server);
     	        	item.setTag(1, ActionsActivity.class);
     	        	item.setTag(2, serviceName);
@@ -249,6 +249,7 @@ public class ServicesActivity extends GDListActivity {
     	int serviceId = new Integer(textItem.getTag(4).toString());
     	Intent intent = new Intent(ServicesActivity.this, (Class<?>) textItem.getTag(1));
     	
+    	intent.putExtra("accountId", this.accountId);
     	intent.putExtra("serviceName", serviceName);
     	intent.putExtra("serviceType", serviceType);
     	intent.putExtra("serviceId", serviceId);
@@ -299,5 +300,25 @@ public class ServicesActivity extends GDListActivity {
         }
         
     }
+    
+    /*
+	 * Check if the serviceType matches a (ve) server
+	 */
+	private Boolean is_ve_server(int serviceType) {
+		
+		if (serviceType >= 668 && serviceType <= 723) return true;
+		else return false;
+		
+	}
+	
+	/*
+	 * Check if the serviceType matches a (dv) server
+	 */
+	private Boolean is_dv_server(int serviceType) {
+	
+		if (serviceType >= 208 && serviceType <= 737) return true;
+		else return false;
+		
+	}
 	
 }
