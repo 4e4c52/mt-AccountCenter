@@ -6,7 +6,7 @@ Its features are those offered by the official [(mt) API](http://mediatemple.net
 This app has currently no official support from Media Temple.
 If you need help, you can ask on the [app blog](http://android.syrinxoon.net) or on Twitter by asking [@OyoKooN](https://twitter.com/#!/OyoKooN) or [@jstart](https://twitter.com/#!/jstart).
 
-Currently supported (mt) servers are (ve) and (dv) 4.0.
+Currently supported (mt) servers are (ve) and (dv) from 2.0 to 4.0.
 
 # Dependencies
 
