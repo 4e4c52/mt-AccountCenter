@@ -21,89 +21,94 @@ import android.util.Log;
 
 public class AddAccountTask implements Runnable {
 	
-   private static final String DEBUG_TAG = "AddAccountTask";
-   private static final String apiAddress = "https://api.mediatemple.net/api/v1/services.json";
-   private static final String userAgentVersion = "1.0";
-   private final AddAccountActivity addAccount;
-   private final String apiKey;
-   private JSONArray result;
+	/* Vars */
+	
+	private static final String DEBUG_TAG = "AddAccountTask";
+	private static final String apiAddress = "https://api.mediatemple.net/api/v1/services.json";
+	private static final String userAgentVersion = "1.0";
+	private final AddAccountActivity addAccount;
+	private final String apiKey;
+	private JSONArray result;
 
-   AddAccountTask(AddAccountActivity addAccount, String apiKey) {
-      this.addAccount = addAccount;
-      this.apiKey = apiKey;
-   }
+	AddAccountTask(AddAccountActivity addAccount, String apiKey) {
+		this.addAccount = addAccount;
+		this.apiKey = apiKey;
+	}
    
-   public void run() {
+	
+	/* Launch the verification */
+	public void run() {
 	   
 	   result = verifyAccount(apiKey);
-	   
 	   addAccount.manageApiKeyVerification(result);
 	   
    }
    
-   @SuppressWarnings("finally")
-   private JSONArray verifyAccount(String apiKey) {
+   /*
+    * Call the API and return the list of services
+    * associated with the account provided
+    */
+	@SuppressWarnings("finally")
+	private JSONArray verifyAccount(String apiKey) {
 	   
-	   JSONArray json = null;
+		JSONArray json = null;
 
-	   try {
+		try {
 		   
-		   // Check if task has been interrupted
-		   if (Thread.interrupted()) throw new InterruptedException();
+			// Check if task has been interrupted
+			if (Thread.interrupted()) throw new InterruptedException();
 		   
-		   // Building RESTfull query		   
-		   String key = URLEncoder.encode(apiKey, "UTF-8");
-		   URL url = new URL(apiAddress + "?apikey=" + key + "&wrapRoot=false");
-           HttpGet httpRequest = null;
+			// Building RESTfull query		   
+			String key = URLEncoder.encode(apiKey, "UTF-8");
+			URL url = new URL(apiAddress + "?apikey=" + key + "&wrapRoot=false");
+			HttpGet httpRequest = null;
 
-           httpRequest = new HttpGet(url.toURI());
-           httpRequest.addHeader("Content-type", "application/json");
-           httpRequest.addHeader("Accept", "application/json");
-           httpRequest.addHeader("Authorization", "MediaTemple " + apiKey);
-           httpRequest.addHeader("Referer", "http://android.syrinxoon.net/p/mt-account-center.html");
-           httpRequest.addHeader("User-Agent", "MtAccountCenter-Android/" + userAgentVersion);
+			httpRequest = new HttpGet(url.toURI());
+			httpRequest.addHeader("Content-type", "application/json");
+			httpRequest.addHeader("Accept", "application/json");
+			httpRequest.addHeader("Authorization", "MediaTemple " + apiKey);
+			httpRequest.addHeader("Referer", "http://android.syrinxoon.net/p/mt-account-center.html");
+			httpRequest.addHeader("User-Agent", "MtAccountCenter-Android/" + userAgentVersion);
 
-           HttpClient httpClient = new DefaultHttpClient();
-           HttpResponse response = (HttpResponse) httpClient.execute(httpRequest);
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpResponse response = (HttpResponse) httpClient.execute(httpRequest);
 
-           HttpEntity entity = response.getEntity();
-           BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity);
-           InputStream input = bufHttpEntity.getContent();
+			HttpEntity entity = response.getEntity();
+			BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity);
+			InputStream input = bufHttpEntity.getContent();
 	       
-	       // Check if task has been interrupted
-	       if (Thread.interrupted()) throw new InterruptedException();
+			// Check if task has been interrupted
+			if (Thread.interrupted()) throw new InterruptedException();
 	       
-	       // Read results from the query
-	       BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-	       String payload = reader.readLine();
-	       reader.close();
-	       input.close();
+			// Read results from the query
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+			String payload = reader.readLine();
+			reader.close();
+			input.close();
 
-	       // Parse to get result, an exception is threw if the API key is wrong
-	       try {
-	    	   json = new JSONArray(payload);	
-	    	   return json;
-	       } catch(JSONException e) {
-	    	   json = new JSONArray();
-	    	   json.put(1, true);
-	    	   return json;
-	       }
+			// Parse the result, an exception is threw if the API key is wrong
+			try {
+				json = new JSONArray(payload);	
+				return json;
+			} catch(JSONException e) {
+				json = new JSONArray();
+				json.put(1, true);
+				return json;
+			}
 	       
 		   
-	   } catch (InterruptedException e) {
-		   Log.e(DEBUG_TAG, "InterruptedException", e);
-	   } catch (IOException e) {
-		   Log.e(DEBUG_TAG, "IOException", e);
-	   } catch (JSONException e) {
-		   Log.e(DEBUG_TAG, "JSONException", e);
-	   } catch (URISyntaxException e) {
-		   Log.e(DEBUG_TAG, "URISyntaxException", e);
-	   } finally {
-		   return json;
-	   }
+		} catch (InterruptedException e) {
+			Log.e(DEBUG_TAG, "InterruptedException", e);
+		} catch (IOException e) {
+			Log.e(DEBUG_TAG, "IOException", e);
+		} catch (JSONException e) {
+			Log.e(DEBUG_TAG, "JSONException", e);
+		} catch (URISyntaxException e) {
+			Log.e(DEBUG_TAG, "URISyntaxException", e);
+		} finally {
+			return json;
+		}
 	   
    }
-   
-   
    
 }

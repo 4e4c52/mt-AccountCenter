@@ -14,9 +14,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
 
-/**
- * Average temperature demo chart.
- */
 public class StatsChart extends AbstractChart {
 	
 	String[] infos = null;

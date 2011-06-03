@@ -1,11 +1,8 @@
 package com.syrinxoon.mtaccountcenter;
 
 import org.achartengine.GraphicalView;
-
 import android.content.Context;
-/**
- * Defines the demo charts.
- */
+
 public interface IChart {
 	
   /** A constant for the name field in a list activity. */
@@ -36,4 +33,3 @@ public interface IChart {
   GraphicalView execute(Context context);
 
 }
-

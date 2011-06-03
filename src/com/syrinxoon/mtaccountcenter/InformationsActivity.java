@@ -9,7 +9,7 @@ import greendroid.app.GDTabActivity;
 
 public class InformationsActivity extends GDTabActivity {
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         

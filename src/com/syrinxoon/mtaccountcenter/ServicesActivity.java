@@ -46,8 +46,9 @@ public class ServicesActivity extends GDListActivity {
 	
 	//private static final String DEBUG_TAG = "ServicesActivity";
 
-	private AppData services;	
+	/* Vars */
 	
+	private AppData services;	
 	private static String[] FROM = { _ID, SERVICE_ID, SERVICE_NAME, SERVICE_PRIMARY_DOMAIN, SERVICE_TYPE, };
 	private static String ORDER_BY = _ID + " ASC";
 	private String WHERE;
@@ -59,6 +60,7 @@ public class ServicesActivity extends GDListActivity {
 	private ItemAdapter viewAdapter;
 	private AppData database;
 	
+	// Dialogs
 	private static final int RENAME_DIALOG = 1;
     
     @Override
@@ -66,11 +68,12 @@ public class ServicesActivity extends GDListActivity {
         
     	super.onCreate(savedInstanceState);
     	
+    	// Retrieve the intent extras
     	this.accountId = getIntent().getIntExtra("accountId", 0);
     	this.apiKey = getIntent().getStringExtra("apiKey");
     	this.accountName = getIntent().getStringExtra("accountName");
-    	services = new AppData(this);
     	
+    	// Set the ActionBar title
     	String label = (String) getResources().getText(R.string.services_label);
     	getActionBar().setTitle(label + " " + accountName);
     	
@@ -85,6 +88,10 @@ public class ServicesActivity extends GDListActivity {
                 .setDrawable(new ActionBarDrawable(getResources(), R.drawable.gd_action_bar_add)), R.id.action_bar_add);
         */
     	
+    	// Load the database
+    	services = new AppData(this);
+    	
+    	// Retrieve services for the given account
     	try {
     		Cursor cursor = getServices(accountId);
     		this.viewAdapter = showServices(cursor, apiKey);
@@ -93,6 +100,7 @@ public class ServicesActivity extends GDListActivity {
     		services.close();
     	}
     	
+    	// Handle long click on the list view items
     	ListView lv = getListView();
     	lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
     		@Override
@@ -166,9 +174,104 @@ public class ServicesActivity extends GDListActivity {
     	
     	return null;
     	
+    }   
+    
+    /*
+     * Handle the clicks on the list items
+     */
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+    	final TextItem textItem = (TextItem) l.getAdapter().getItem(position);
+    	String serviceName = textItem.getTag(2).toString();
+    	int serviceType = new Integer(textItem.getTag(3).toString());
+    	int serviceId = new Integer(textItem.getTag(4).toString());
+    	Intent intent = new Intent(ServicesActivity.this, (Class<?>) textItem.getTag(1));
+    	
+    	intent.putExtra("accountId", this.accountId);
+    	intent.putExtra("serviceName", serviceName);
+    	intent.putExtra("serviceType", serviceType);
+    	intent.putExtra("serviceId", serviceId);
+    	intent.putExtra("apiKey", this.apiKey);
+    	
+    	startActivity(intent);
     }
     
     /*
+     * Handle the long click on the list items
+     */
+    protected void onListItemLongClick(AdapterView<?> a, View v, int position, long id) {
+    	ServicesActivity.this.selectedItemPosition = position;
+        mBar.show(v);
+    }
+    
+    /* QuickActions management */
+    
+    /*
+     * Create the QuickActionBars for the services
+     */
+    private void prepareQuickActionBar() {
+        mBar = new QuickActionBar(this);
+        mBar.addQuickAction(new MyQuickAction(this, R.drawable.gd_action_bar_edit, R.string.rename_quickaction));
+        mBar.setOnQuickActionClickListener(mActionListener);
+    }
+    
+    /*
+     * Handle QuickActionsBar clicks
+     */
+    private OnQuickActionClickListener mActionListener = new OnQuickActionClickListener() {
+        public void onQuickActionClicked(QuickActionWidget widget, int position) {
+            switch (position) {
+            case 0:
+            	showDialog(RENAME_DIALOG);
+            	break;
+            }
+        }
+    };
+    
+    /*
+     * QuickAction customization
+     */
+    private static class MyQuickAction extends QuickAction {
+        
+        private static final ColorFilter BLACK_CF = new LightingColorFilter(Color.BLACK, Color.BLACK);
+
+        public MyQuickAction(Context ctx, int drawableId, int titleId) {
+            super(ctx, buildDrawable(ctx, drawableId), titleId);
+        }
+        
+        private static Drawable buildDrawable(Context ctx, int drawableId) {
+            Drawable d = ctx.getResources().getDrawable(drawableId);
+            d.setColorFilter(BLACK_CF);
+            return d;
+        }
+        
+    }
+    
+    /* Utility functions */
+    
+    /*
+	 * Check if the serviceType matches a (ve) server
+	 */
+	private Boolean is_ve_server(int serviceType) {
+		
+		if (serviceType >= 668 && serviceType <= 723) return true;
+		else return false;
+		
+	}
+	
+	/*
+	 * Check if the serviceType matches a (dv) server
+	 */
+	private Boolean is_dv_server(int serviceType) {
+	
+		if (serviceType >= 208 && serviceType <= 737) return true;
+		else return false;
+		
+	}
+	
+	/* Services management */
+	
+	/*
      * Get the services associated to the account
      */
     private Cursor getServices(int accountId) {
@@ -240,85 +343,5 @@ public class ServicesActivity extends GDListActivity {
     	return null;
     	
     }
-    
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-    	final TextItem textItem = (TextItem) l.getAdapter().getItem(position);
-    	String serviceName = textItem.getTag(2).toString();
-    	int serviceType = new Integer(textItem.getTag(3).toString());
-    	int serviceId = new Integer(textItem.getTag(4).toString());
-    	Intent intent = new Intent(ServicesActivity.this, (Class<?>) textItem.getTag(1));
-    	
-    	intent.putExtra("accountId", this.accountId);
-    	intent.putExtra("serviceName", serviceName);
-    	intent.putExtra("serviceType", serviceType);
-    	intent.putExtra("serviceId", serviceId);
-    	intent.putExtra("apiKey", this.apiKey);
-    	
-    	startActivity(intent);
-    }
-    
-    protected void onListItemLongClick(AdapterView<?> a, View v, int position, long id) {
-    	ServicesActivity.this.selectedItemPosition = position;
-        mBar.show(v);
-    }
-    
-    /*
-     * Create the QuickActionBars for the services
-     */
-    private void prepareQuickActionBar() {
-        mBar = new QuickActionBar(this);
-        mBar.addQuickAction(new MyQuickAction(this, R.drawable.gd_action_bar_edit, R.string.rename_quickaction));
-        mBar.setOnQuickActionClickListener(mActionListener);
-    }
-    
-    /*
-     * Handle QuickActionsBar clicks
-     */
-    private OnQuickActionClickListener mActionListener = new OnQuickActionClickListener() {
-        public void onQuickActionClicked(QuickActionWidget widget, int position) {
-            switch (position) {
-            case 0:
-            	showDialog(RENAME_DIALOG);
-            	break;
-            }
-        }
-    };
-    
-    private static class MyQuickAction extends QuickAction {
-        
-        private static final ColorFilter BLACK_CF = new LightingColorFilter(Color.BLACK, Color.BLACK);
-
-        public MyQuickAction(Context ctx, int drawableId, int titleId) {
-            super(ctx, buildDrawable(ctx, drawableId), titleId);
-        }
-        
-        private static Drawable buildDrawable(Context ctx, int drawableId) {
-            Drawable d = ctx.getResources().getDrawable(drawableId);
-            d.setColorFilter(BLACK_CF);
-            return d;
-        }
-        
-    }
-    
-    /*
-	 * Check if the serviceType matches a (ve) server
-	 */
-	private Boolean is_ve_server(int serviceType) {
-		
-		if (serviceType >= 668 && serviceType <= 723) return true;
-		else return false;
-		
-	}
-	
-	/*
-	 * Check if the serviceType matches a (dv) server
-	 */
-	private Boolean is_dv_server(int serviceType) {
-	
-		if (serviceType >= 208 && serviceType <= 737) return true;
-		else return false;
-		
-	}
 	
 }

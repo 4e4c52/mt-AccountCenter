@@ -17,11 +17,14 @@ public class StatsActivity extends GDActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        // Retrieve intent extras
         String serviceName = getIntent().getStringExtra("serviceName");
         String apiKey = getIntent().getStringExtra("apiKey");
         int accountId = getIntent().getIntExtra("accountId", 0);
         int serviceType = getIntent().getIntExtra("serviceType", 0);
         int serviceId = getIntent().getIntExtra("serviceId", 0);
+        
+        // Set the ActionBar title
         String label = (String) getResources().getText(R.string.stats_label_1);
     	getActionBar().setTitle(label + " " + serviceName);
         
@@ -33,10 +36,10 @@ public class StatsActivity extends GDActivity {
 			e.printStackTrace();
 		}
 		
+		// Load the titles from the resources
 		String[] titles = { getResources().getText(R.string.cpu).toString(), getResources().getText(R.string.memory).toString() };
 		
 		JSONArray items = stats.optJSONArray("stats");
-		
 		int length = 0;
 		
 		// If we can't retrieve any statistics, let's go back
@@ -78,6 +81,7 @@ public class StatsActivity extends GDActivity {
 		IChart chart = new StatsChart(titles, dates, cpu, memory, length);
 		View view = (View) chart.execute(this); 
 		
+		// Load the chart in the view
 		setActionBarContentView(view);
 		
     }

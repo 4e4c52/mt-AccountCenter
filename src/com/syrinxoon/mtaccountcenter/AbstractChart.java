@@ -14,9 +14,7 @@ import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
-/**
- * An abstract class for the demo charts to extend.
- */
+
 public abstract class AbstractChart implements IChart {
 
   /**

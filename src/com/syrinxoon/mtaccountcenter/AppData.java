@@ -26,7 +26,7 @@ public class AppData extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "accountcenter.db";
 	private static final int DATABASE_VERSION = 1;
 
-	/** Create a helper object for the database */
+	/* Create a helper object for the database */
 	public AppData(Context ctx) {
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -40,6 +40,9 @@ public class AppData extends SQLiteOpenHelper {
 	    }
 	}
 
+	/*
+	 * Create the tables in the database
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		

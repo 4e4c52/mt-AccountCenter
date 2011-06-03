@@ -41,32 +41,38 @@ public class AddAccountActivity extends GDActivity {
 	
 	//private static final String DEBUG_TAG = "AddAccountActivity";
 	
+	/* Vars */
+	
+	// UI elements
 	private EditText accountName;
 	private EditText accountApiKey;
 	private Button addAccountButton;
 	
+	// Multithreading
 	private Handler guiThread;
 	private ExecutorService addAccountThread;
 	private Runnable addAccountTask;
 	private Future<?> addAccountPending;
 	
+	// Dialogs
 	private Dialog dialog;
 	private Handler manageDialogs = new Handler();
-	
-	private AppData database;
-	
-	private long accountId;
-	private int servicesAdded = 0;
 	private static final int ADD_ACCOUNT_DIALOG = 0;
 	private static final int ERROR_NAME_DIALOG = 1;
 	private static final int  ERROR_API_KEY_DIALOG = 2;
 	private static final int ERROR_CREDENTIALS_DIALOG = 3;
+	
+	// Database and misc 
+	private AppData database;
+	private long accountId;
+	private int servicesAdded = 0;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     
 		super.onCreate(savedInstanceState);
 
+        // Load the layout
         setActionBarContentView(R.layout.add_account);
         
         // Get a handle to all user interface elements
@@ -74,7 +80,7 @@ public class AddAccountActivity extends GDActivity {
         accountApiKey = (EditText) findViewById(R.id.account_api_key);    
         addAccountButton = (Button) findViewById(R.id.add_account_button);
         
-        // Setup database
+        // Load database
         database = new AppData(this);
         
         // Setup event handlers
@@ -89,6 +95,9 @@ public class AddAccountActivity extends GDActivity {
 
     }
 	
+	/*
+	 * Manage all the dialogs
+	 */
 	protected Dialog onCreateDialog(int id) {
 	    AlertDialog.Builder builder;
 	    switch(id) {
@@ -191,8 +200,10 @@ public class AddAccountActivity extends GDActivity {
 	    };
 	}
 	
+	/* API verification functions */
+	
 	/*
-	 * Verify if an accounts API key is correct 
+	 * Verify either an account API key is correct 
 	 */
 	private void verifyAccount() {
 		// Cancel previous verification if it hasn't started yet
@@ -272,7 +283,7 @@ public class AddAccountActivity extends GDActivity {
 		     }
 		}
 		
-		// If the account doesn't have at least a (dv) 4.0 or (ve) sever
+		// If the account doesn't have at least a (dv) or (ve) sever
 		if (this.servicesAdded == 0 && error == false) {
 			this.deleteAccount(this.accountId);
 		}
@@ -289,6 +300,11 @@ public class AddAccountActivity extends GDActivity {
 		
 	}
 	
+	/* Account and services functions */
+	
+	/*
+	 * Register a service in the database
+	 */
 	private void addService(long accountId, int serviceType, int serviceId, String serviceName, String servicePrimaryDomain) {
 		
 		int account = (int) accountId; 
@@ -306,6 +322,9 @@ public class AddAccountActivity extends GDActivity {
 		
 	}
 	
+	/*
+	 * Register an account in the database
+	 */
 	private long addAccount(String name, String apiKey) {
 	      
 		SQLiteDatabase db = database.getWritableDatabase();
@@ -319,6 +338,10 @@ public class AddAccountActivity extends GDActivity {
 		   
 	}
 	
+	/*
+	 * Delete an account from the database
+	 * Called when the account added doesn't have a least a (ve) or (dv) server
+	 */
 	private void deleteAccount(long accountId) {
 		
 		String WHERE = _ID + "=" + (int) accountId;

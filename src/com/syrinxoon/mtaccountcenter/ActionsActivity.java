@@ -35,6 +35,9 @@ public class ActionsActivity extends GDListActivity {
 	
 	//private final static String DEBUG_TAG = "ActionsActivity";
 	
+	/* Vars */
+	
+	// Services
 	private String serviceName;
 	private String data;
 	private int accountId;
@@ -42,11 +45,13 @@ public class ActionsActivity extends GDListActivity {
 	private int serviceId;
 	private String apiKey;
 	
+	// Multithreading
 	private Handler guiThread;
 	private ExecutorService requestThread;
 	private Runnable requestTask;
 	private Future<?> requestPending;
 	
+	// Dialogs
 	private final static int ACTION_REBOOT = 1;
 	private final static int ACTION_HD_SPACE = 2;
 	private final static int ACTION_FLUSH = 3;
@@ -54,13 +59,11 @@ public class ActionsActivity extends GDListActivity {
 	private final static int ACTION_STATS_60 = 5;
 	private final static int ACTION_ROOT_PASSWORD = 6;
 	private final static int ACTION_PLESK_PASSWORD = 7;
-	
-	private int actionType = 0;
-	
 	private Dialog dialog;
 	private int currentDialog;
 	private Handler manageDialogs = new Handler();
 	
+	// Actions
 	private final static int REQUEST_ERROR = 0;
 	private final static int REBOOT_DIALOG = 1;
 	private final static int HD_SPACE_DIALOG = 2;
@@ -71,21 +74,25 @@ public class ActionsActivity extends GDListActivity {
 	private final static int SET_PLESK_PASSWORD_DIALOG = 7;
 	private final static int STATS_15_DIALOG = 8;
 	private final static int STATS_60_DIALOG = 9;
+	private int actionType = 0;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         
     	super.onCreate(savedInstanceState);
     	
+    	// Retrieve the intent extras
     	this.accountId = getIntent().getIntExtra("accountId", 0);
     	this.serviceName = getIntent().getStringExtra("serviceName");
     	this.serviceType = getIntent().getIntExtra("serviceType", 0);
     	this.serviceId = getIntent().getIntExtra("serviceId", 0);
     	this.apiKey = getIntent().getStringExtra("apiKey");
     	
+    	// Set the ActionBar title
     	String label = (String) getResources().getText(R.string.actions_label);
     	getActionBar().setTitle(label + " " + this.serviceName);
     	
+    	// Show the available actions
     	List<Item> list = new ArrayList<Item>();
     	
     	list.add(new DescriptionItem(getResources().getText(R.string.actions_description).toString())); 
@@ -124,12 +131,18 @@ public class ActionsActivity extends GDListActivity {
     	
 	}
 	
+	/*
+	 * Create the items for the list view
+	 */
 	private TextItem createTextItem(int text, int identifier) {
 		final TextItem textItem = new TextItem(getResources().getText(text).toString());
 		textItem.setTag(1, identifier);
 		return textItem;
 	}
 	
+	/*
+	 * Handle the clicks on the list items
+	 */
 	@Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
     	final TextItem textItem = (TextItem) l.getAdapter().getItem(position);
@@ -146,6 +159,9 @@ public class ActionsActivity extends GDListActivity {
     	}
     }
 	
+	/*
+	 * Manage the request result for the stats requests
+	 */
 	public void manageRequestResult(JSONObject stats) {
 		
 		Boolean error = false;
@@ -196,6 +212,9 @@ public class ActionsActivity extends GDListActivity {
 		
 	}
 	
+	/*
+	 * Manage the request result for all non stats actions
+	 */
 	public void manageRequestResult(JSONArray result) {
 		
 		Boolean error = false;
@@ -272,6 +291,9 @@ public class ActionsActivity extends GDListActivity {
 		
 	}
 	
+	/*
+	 * Call the thread to perform a request in the background
+	 */
 	private void performRequest(int identifier, int action) {
 		if (action == ACTION_ROOT_PASSWORD) {
 			showDialog(SET_ROOT_PASSWORD_DIALOG);
@@ -340,6 +362,9 @@ public class ActionsActivity extends GDListActivity {
 	    };
 	}
 	
+	/*
+	 * Manage the dialogs
+	 */
 	protected Dialog onCreateDialog(int id) {
 	    AlertDialog.Builder builder;
 	    switch(id) {
