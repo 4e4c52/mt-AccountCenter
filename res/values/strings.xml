@@ -103,7 +103,7 @@
     <string name="about">About</string>
     <string name="license">Copyright</string>
     <string name="more_info_on_application">For more information on the (mt) Account Center and how to use it, go to the application official page:</string>
-    <string name="about_content">The (mt) Account Center is intended to monitor your (mt) servers. With this app, you can do (almost) everything the API offers.</string>
+    <string name="about_content">The (mt) Account Center is intended to monitor your (mt) servers.\nWith this app, you can do (almost) everything the API offers.\n\nThis app is developed by Nathan Le Ray.</string>
     <string name="disclaimer">\nPlease read the following disclaimer freely inspired by the one used by CyanogenMod.\n\nI\'m not responsible of any damages or problems this app can causes to your servers. YOU are choosing to use this app, and if you point the finger at me for messing up your server, I will laugh at you.</string>
     
     <!-- Misc -->
